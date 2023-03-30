@@ -1,4 +1,4 @@
-interface Event {
+export interface IEvent {
   id: string;
   title: string;
   description: string;
@@ -8,7 +8,7 @@ interface Event {
   isFeatured: boolean;
 }
 
-const DUMMY_EVENTS: Event[] = [
+const DUMMY_EVENTS: IEvent[] = [
   {
     id: "e1",
     title: "Programming for everyone",
@@ -41,18 +41,18 @@ const DUMMY_EVENTS: Event[] = [
   },
 ];
 
-export function getFeaturedEvents(): Event[] {
+export function getFeaturedEvents(): IEvent[] {
   return DUMMY_EVENTS.filter((event) => event.isFeatured);
 }
 
-export function getAllEvents(): Event[] {
+export function getAllEvents(): IEvent[] {
   return DUMMY_EVENTS;
 }
 
 export function getFilteredEvents(dateFilter: {
   year: number;
   month: number;
-}): Event[] {
+}): IEvent[] {
   const { year, month } = dateFilter;
 
   let filteredEvents = DUMMY_EVENTS.filter((event) => {
@@ -65,6 +65,6 @@ export function getFilteredEvents(dateFilter: {
   return filteredEvents;
 }
 
-export function getEventById(id: string): Event | undefined {
+export function getEventById(id: string): IEvent | undefined {
   return DUMMY_EVENTS.find((event) => event.id === id);
 }
