@@ -1,12 +1,4 @@
-export interface IEvent {
-  id: string;
-  title: string;
-  description: string;
-  location: string;
-  date: string;
-  image: string;
-  isFeatured: boolean;
-}
+import { IEvent } from "@/utils/api";
 
 const DUMMY_EVENTS: IEvent[] = [
   {
@@ -41,13 +33,13 @@ const DUMMY_EVENTS: IEvent[] = [
   },
 ];
 
-export function getFeaturedEvents(): IEvent[] {
-  return DUMMY_EVENTS.filter((event) => event.isFeatured);
-}
+// export function getFeaturedEvents(): IEvent[] {
+//   return DUMMY_EVENTS.filter((event) => event.isFeatured);
+// }
 
-export function getAllEvents(): IEvent[] {
-  return DUMMY_EVENTS;
-}
+// export function getAllEvents(): IEvent[] {
+//   return DUMMY_EVENTS;
+// }
 
 export function getFilteredEvents(dateFilter: {
   year: number;

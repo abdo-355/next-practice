@@ -1,4 +1,4 @@
-import { IEvent } from "@/data/dummy-data"
+import { IEvent } from "@/utils/api";
 import EventItem from "./EventItem"
 import styles from "./EventList.module.css"
 

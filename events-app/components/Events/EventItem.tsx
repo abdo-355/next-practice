@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { IEvent } from "@/data/dummy-data";
+import { IEvent } from "@/utils/api";
 import styles from "./EventItem.module.css"
 import Button from "../UI/Button";
 import DateIcon from "../UI/icons/date-icon";
