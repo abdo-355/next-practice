@@ -1,15 +1,62 @@
-import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
 
 import EventList from "@/components/Events/Eventlist";
 import ResultsTitle from "@/components/Events/ResultsTitle";
-import { getFilteredEvents } from "@/data/dummy-data";
 import Button from "@/components/UI/Button";
 import ErrorAlert from "@/components/UI/ErrorAlert";
+import { IEvent, getFilteredEvents } from "@/utils/api";
 
-const FilteredEvents = () => {
-    const router = useRouter();
+interface IEventDate {
+    month: number;
+    year: number;
+}
 
-    const filterData = router.query.slug
+// the events and the date are only available when the hasError Prop is not set or set to false
+type Props = {
+    events: IEvent[];
+    date: IEventDate;
+    hasError?: false;
+} | {
+    hasError: true;
+    events?: IEvent[];
+    date?: IEventDate;
+}
+
+const FilteredEvents: React.FC<Props> = ({ events, hasError, date }) => {
+
+    if (hasError) {
+        return <>
+            <ErrorAlert>
+                <p className="center">Invalid filter. Please adjust your values</p>
+            </ErrorAlert>
+            <div className="center">
+                <Button link="/events">Show All Events</Button>
+            </div>
+        </>
+    }
+
+    if (!events || events.length === 0) {
+        return <>
+            <ErrorAlert>
+                <p className="center">No events found for the chosen filter!</p>
+            </ErrorAlert>
+            <div className="center">
+                <Button link="/events">Show All Events</Button>
+            </div>
+        </>
+    }
+    const eventDate = new Date(date.year, date.month - 1)
+
+    return <>
+        <ResultsTitle date={eventDate} />
+        <EventList items={events} />
+    </>
+}
+
+export const getServerSideProps: GetServerSideProps<Props> = async (context) => {
+    const { params } = context;
+
+    const filterData = params?.slug as string[]
 
     if (!filterData) {
         return <>
@@ -31,35 +78,21 @@ const FilteredEvents = () => {
         year < 2021 ||
         month > 12 ||
         month < 1) {
-        return <>
-            <ErrorAlert>
-                <p className="center">Invalid filter. Please adjust your values</p>
-            </ErrorAlert>
-            <div className="center">
-                <Button link="/events">Show All Events</Button>
-            </div>
-        </>
+        return {
+            props: { hasError: true }
+        }
     }
 
-    const events = getFilteredEvents({ year, month })
+    const events = await getFilteredEvents({ year, month })
 
-    if (!events || events.length === 0) {
-        return <>
-            <ErrorAlert>
-                <p className="center">No events found for the chosen filter!</p>
-            </ErrorAlert>
-            <div className="center">
-                <Button link="/events">Show All Events</Button>
-            </div>
-        </>
+    const date = new Date(year, month - 1).toISOString()
+
+    return {
+        props: {
+            events,
+            date: { year, month }
+        }
     }
-
-    const date = new Date(year, month - 1)
-
-    return <>
-        <ResultsTitle date={date} />
-        <EventList items={events} />
-    </>
 }
 
 export default FilteredEvents
