@@ -1,4 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
+
 import AddressIcon from '../UI/icons/address-icon';
 import DateIcon from '../UI/icons/date-icon';
 import LogisticsItem from './LogisticsItem';
@@ -27,7 +28,7 @@ const EventLogistics: React.FC<Props> = ({
   return (
     <section className={styles.logistics}>
       <div className={styles.image}>
-        <img src={`/${image}`} alt={imageAlt} />
+        <Image src={`/${image}`} alt={imageAlt} width={720} height={720} />
       </div>
       <ul className={styles.list}>
         <LogisticsItem icon={DateIcon}>

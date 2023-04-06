@@ -1,4 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
+
 import { IEvent } from "@/utils/api";
 import styles from "./EventItem.module.css"
 import Button from "../UI/Button";
@@ -19,7 +20,7 @@ const EventItem: React.FC<{ item: IEvent }> = ({ item }) => {
     const eventLink = "/events/" + item.id
 
     return <li className={styles.item}>
-        <img src={"/" + item.image} alt={item.title} />
+        <Image src={"/" + item.image} alt={item.title} width={720} height={480} />
         <div className={styles.content}>
             <div className={styles.summary}>
                 <h2>{item.title}</h2>
