@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import Head from "next/head";
 
 import { IEvent, getFeaturedEvents } from "@/utils/api";
 import EventList from "@/components/Events/Eventlist";
@@ -10,6 +11,10 @@ interface Props {
 const HomePage: React.FC<Props> = ({ featuredEvents }) => {
 
     return <div>
+        <Head>
+            <title>Events App</title>
+            <meta name="description" content="discover new events daily..." />
+        </Head>
         <ul>
             <EventList items={featuredEvents} />
         </ul>

@@ -1,4 +1,5 @@
 import { GetStaticProps, GetStaticPaths } from "next";
+import Head from "next/head";
 
 import EventContent from "@/components/EventDetail/EventContent";
 import EventLogistics from "@/components/EventDetail/EventLogistics";
@@ -20,6 +21,10 @@ const EventDetailsPage: React.FC<Props> = ({ event }) => {
     const { date, description, image, location, title } = event
 
     return <>
+        <Head>
+            <title>{title}</title>
+            <meta name="description" content={description} />
+        </Head>
         <EventSummary title={title} />
         <EventLogistics image={image} imageAlt={title} date={date} address={location} />
         <EventContent>

@@ -1,4 +1,5 @@
 import { GetServerSideProps } from "next";
+import Head from "next/head";
 
 import EventList from "@/components/Events/Eventlist";
 import ResultsTitle from "@/components/Events/ResultsTitle";
@@ -48,6 +49,10 @@ const FilteredEvents: React.FC<Props> = ({ events, hasError, date }) => {
     const eventDate = new Date(date.year, date.month - 1)
 
     return <>
+        <Head>
+            <meta name="description" content={`all events for ${date.month}/${date.year}`} />
+            <title>Filtered events</title>
+        </Head>
         <ResultsTitle date={eventDate} />
         <EventList items={events} />
     </>
@@ -85,8 +90,6 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
 
     const events = await getFilteredEvents({ year, month })
 
-    const date = new Date(year, month - 1).toISOString()
-
     return {
         props: {
             events,
@@ -95,4 +98,4 @@ export const getServerSideProps: GetServerSideProps<Props> = async (context) => 
     }
 }
 
-export default FilteredEvents
+export default FilteredEvents 
