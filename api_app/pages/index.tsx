@@ -1,6 +1,10 @@
-import { useRef, FormEventHandler } from "react";
+import { useRef, FormEventHandler, useState } from "react";
+
+import { IFeedback } from "./api/feedback";
 
 const HomePage = () => {
+  const [feedback, setFeedback] = useState<IFeedback[]>([])
+
   const emailRef = useRef<HTMLInputElement>(null)
   const feedbackRef = useRef<HTMLTextAreaElement>(null)
 
@@ -13,9 +17,19 @@ const HomePage = () => {
     fetch("/api/feedback", {
       method: 'POST',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: enteredEmail, feedback: enteredFeedback })
-    }).then(async response => {
-      console.log(await response.json());
+      body: JSON.stringify({ email: enteredEmail, text: enteredFeedback })
+    }).then(response => {
+      console.log(response.json());
+    }).catch(err => {
+      console.log(err);
+    })
+  }
+
+  const loadFeedback = () => {
+    fetch("/api/feedback").then(async response => {
+      const data = await response.json()
+
+      setFeedback(data.feedback)
     }).catch(err => {
       console.log(err);
     })
@@ -34,6 +48,13 @@ const HomePage = () => {
         </div>
         <button>Send Feedback</button>
       </form>
+      <hr />
+      <button onClick={loadFeedback}>Load Feedback</button>
+      {feedback.length > 0 && <ul>
+        {feedback.map(feedback =>
+          <li key={feedback.id}>{feedback.feedback}</li>
+        )}
+      </ul>}
     </div>
   )
 }
