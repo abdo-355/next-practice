@@ -1,6 +1,6 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode } from "react";
 
-import styles from './LogisticsItem.module.css';
+import styles from "./LogisticsItem.module.css";
 
 interface Props {
   icon: FC;

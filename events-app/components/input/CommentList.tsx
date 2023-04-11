@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
-import styles from './CommentList.module.css';
-import { IComment } from './NewComment';
+import styles from "./CommentList.module.css";
+import { IComment } from "./NewComment";
 
 interface Props {
   eventId: string

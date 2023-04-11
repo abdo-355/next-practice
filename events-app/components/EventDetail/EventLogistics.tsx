@@ -1,9 +1,9 @@
-import Image from 'next/image';
+import Image from "next/image";
 
-import AddressIcon from '../UI/icons/address-icon';
-import DateIcon from '../UI/icons/date-icon';
-import LogisticsItem from './LogisticsItem';
-import styles from './EventLogistics.module.css';
+import AddressIcon from "../UI/icons/address-icon";
+import DateIcon from "../UI/icons/date-icon";
+import LogisticsItem from "./LogisticsItem";
+import styles from "./EventLogistics.module.css";
 
 interface Props {
   date: string;
@@ -18,12 +18,12 @@ const EventLogistics: React.FC<Props> = ({
   image,
   imageAlt,
 }) => {
-  const humanReadableDate = new Date(date).toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+  const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   });
-  const addressText = address.replace(', ', '\n');
+  const addressText = address.replace(", ", "\n");
 
   return (
     <section className={styles.logistics}>

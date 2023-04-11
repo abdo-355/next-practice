@@ -1,6 +1,6 @@
-import { ReactNode, FC } from 'react';
+import { ReactNode, FC } from "react";
 
-import styles from './EventContent.module.css';
+import styles from "./EventContent.module.css";
 
 interface Props {
   children: ReactNode;

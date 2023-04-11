@@ -1,6 +1,6 @@
-import { FC, ReactNode } from 'react';
+import { FC, ReactNode } from "react";
 
-import styles from './ErrorAlert.module.css';
+import styles from "./ErrorAlert.module.css";
 
 interface Props {
   children: ReactNode;

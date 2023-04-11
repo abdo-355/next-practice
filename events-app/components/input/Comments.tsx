@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import CommentList from './CommentList';
-import NewComment, { IComment } from './NewComment';
-import styles from './Comments.module.css';
+import CommentList from "./CommentList";
+import NewComment, { IComment } from "./NewComment";
+import styles from "./Comments.module.css";
 
 interface Props {
   eventId: string;
@@ -32,7 +32,7 @@ const Comments: React.FC<Props> = (props) => {
   return (
     <section className={styles.comments}>
       <button onClick={toggleCommentsHandler}>
-        {showComments ? 'Hide' : 'Show'} Comments
+        {showComments ? "Hide" : "Show"} Comments
       </button>
       {showComments && <>
         <NewComment onAddComment={addCommentHandler} />
