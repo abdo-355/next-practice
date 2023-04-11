@@ -34,8 +34,10 @@ const Comments: React.FC<Props> = (props) => {
       <button onClick={toggleCommentsHandler}>
         {showComments ? 'Hide' : 'Show'} Comments
       </button>
-      {showComments && <NewComment onAddComment={addCommentHandler} />}
-      {showComments && <CommentList />}
+      {showComments && <>
+        <NewComment onAddComment={addCommentHandler} />
+        <CommentList eventId={eventId} />
+      </>}
     </section>
   );
 };

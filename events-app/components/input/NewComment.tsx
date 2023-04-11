@@ -2,6 +2,7 @@ import { useRef, useState } from 'react';
 import styles from './NewComment.module.css';
 
 export interface IComment {
+  _id?: string;
   email: string;
   name: string;
   comment: string;

@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 
-import Newsletter from "@/models/Newsletter";
+import Email from "@/models/Email";
 import connectDB from "@/lib/connectDB";
 
 const handler: NextApiHandler = async (req, res) => {
@@ -8,10 +8,9 @@ const handler: NextApiHandler = async (req, res) => {
   connectDB();
 
   if (req.method === "POST") {
-    const email = req.body.email;
-    const newsletter = new Newsletter({ email });
+    const email = new Email({ email: req.body.email });
 
-    await newsletter.save();
+    await email.save();
 
     return res.status(201).json({ message: "Signed up!" });
   }
