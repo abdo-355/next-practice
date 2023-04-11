@@ -3,6 +3,7 @@ import Head from "next/head";
 
 import { IEvent, getFeaturedEvents } from "@/utils/api";
 import EventList from "@/components/Events/Eventlist";
+import NewsletterRegistration from "@/components/input/NewsletterRegistration";
 
 interface Props {
     featuredEvents: IEvent[];
@@ -16,6 +17,7 @@ const HomePage: React.FC<Props> = ({ featuredEvents }) => {
             <meta name="description" content="discover new events daily..." />
         </Head>
         <ul>
+            <NewsletterRegistration />
             <EventList items={featuredEvents} />
         </ul>
     </div>

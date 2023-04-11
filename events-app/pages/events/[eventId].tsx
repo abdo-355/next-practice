@@ -6,6 +6,7 @@ import EventLogistics from "@/components/EventDetail/EventLogistics";
 import EventSummary from "@/components/EventDetail/EventSummary";
 import { IEvent, getFeaturedEvents, getEventById } from "@/utils/api";
 import ErrorAlert from "@/components/UI/ErrorAlert";
+import Comments from "@/components/input/Comments";
 
 interface Props {
     event?: IEvent;
@@ -18,7 +19,7 @@ const EventDetailsPage: React.FC<Props> = ({ event }) => {
         </ErrorAlert>
     }
 
-    const { date, description, image, location, title } = event
+    const { date, description, image, location, title, id } = event
 
     return <>
         <Head>
@@ -30,6 +31,7 @@ const EventDetailsPage: React.FC<Props> = ({ event }) => {
         <EventContent>
             <p>{description}</p>
         </EventContent>
+        <Comments eventId={id} />
     </>
 }
 
