@@ -18,7 +18,7 @@ const Comments: React.FC<Props> = (props) => {
   }
 
   const addCommentHandler = async (commentData: IComment) => {
-    const res = await fetch(`/api/events/comments/${eventId}`, {
+    const res = await fetch(`/api/comments/${eventId}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
