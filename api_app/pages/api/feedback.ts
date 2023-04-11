@@ -10,7 +10,7 @@ export interface IFeedback {
 
 const filePath = path.join(process.cwd(), "data", "feedback.json");
 
-const getFeedbacks = (): IFeedback[] => {
+export const getfeedback = (): IFeedback[] => {
   const data = fs.readFileSync(filePath);
 
   return JSON.parse(data as unknown as string);
@@ -27,8 +27,7 @@ const handler: NextApiHandler = (req, res) => {
       feedback: text,
     };
 
-    // TODO: store feedback in the database or a file
-    const feedback = getFeedbacks();
+    const feedback = getfeedback();
 
     feedback.push(newFeedback);
 
@@ -37,7 +36,7 @@ const handler: NextApiHandler = (req, res) => {
     return res.status(201).json({ message: "Feedback saved successfully" });
   } else {
     res.json({
-      feedback: getFeedbacks(),
+      feedback: getfeedback(),
     });
   }
 };
