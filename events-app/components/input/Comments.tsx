@@ -1,32 +1,58 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 import CommentList from "./CommentList";
 import NewComment, { IComment } from "./NewComment";
 import styles from "./Comments.module.css";
+import NotificationContext from "@/context/notification";
 
 interface Props {
   eventId: string;
 }
 
-const Comments: React.FC<Props> = (props) => {
-  const { eventId } = props;
-
+const Comments: React.FC<Props> = ({ eventId }) => {
   const [showComments, setShowComments] = useState<boolean>(false);
+  const { showNotification } = useContext(NotificationContext)
 
   const toggleCommentsHandler = () => {
     setShowComments((prevStatus) => !prevStatus);
   }
 
   const addCommentHandler = async (commentData: IComment) => {
-    const res = await fetch(`/api/comments/${eventId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(commentData)
-    })
+    try {
+      showNotification({
+        title: "Posting...",
+        message: "Posting the comment",
+        status: "pending"
+      })
 
-    console.log(await res.json())
+      const res = await fetch(`/api/comments/${eventId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(commentData)
+      })
+
+      if (res.ok) {
+        showNotification({
+          title: "Success!",
+          message: "Comment added successfully",
+          status: "success"
+        })
+      } else {
+        const data = await res.json();
+
+        throw new Error(data.message || "Something went wrong!")
+      }
+
+      console.log(await res.json())
+    } catch (err: unknown) {
+      showNotification({
+        title: "Error",
+        message: (err as { message: string }).message,
+        status: "error"
+      })
+    }
   }
 
   return (

@@ -1,15 +1,15 @@
 import { useContext } from "react";
-// import NotificationContext from "../../store/notification-context";
+import NotificationContext from "@/context/notification";
 import styles from "./notification.module.css";
 
-interface Props {
+export interface INotification {
     title: string;
     message: string;
     status: "success" | "error" | "pending";
 }
 
-const Notification: React.FC<Props> = ({ title, message, status }) => {
-    // const notificationCtx = useContext(NotificationContext);
+const Notification: React.FC<INotification> = ({ title, message, status }) => {
+    const { hideNotification } = useContext(NotificationContext);
 
     let statusClasses = "";
 
@@ -28,7 +28,7 @@ const Notification: React.FC<Props> = ({ title, message, status }) => {
     const activeClasses = `${styles.notification} ${statusClasses}`;
 
     return (
-        <div className={activeClasses}>
+        <div className={activeClasses} onClick={hideNotification}>
             <h2>{title}</h2>
             <p>{message}</p>
         </div>

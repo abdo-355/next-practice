@@ -1,24 +1,51 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 
 import styles from "./NewsletterRegistration.module.css";
+import NotificationContext from "@/context/notification";
 
 const NewsletterRegistration: React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null)
+  const { showNotification } = useContext(NotificationContext);
 
   const registrationHandler = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const enteredEmail = emailRef.current!.value;
+    try {
+      const enteredEmail = emailRef.current!.value;
 
-    const res = await fetch("/api/newsletter", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email: enteredEmail })
-    })
+      showNotification({
+        title: "Signing up...",
+        message: "registering for the newsletter",
+        status: "pending"
+      })
 
-    console.log(await res.json())
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: enteredEmail })
+      })
+
+      if (res.ok) {
+        showNotification({
+          title: "Success!",
+          message: "successfully registered for the newsletter",
+          status: "success"
+        })
+      } else {
+        const data = await res.json();
+
+        throw new Error(data.message || "Something went wrong!")
+      }
+
+    } catch (err: unknown) {
+      showNotification({
+        title: "Error",
+        message: (err as { message: string }).message,
+        status: "error"
+      })
+    }
   }
 
   return (

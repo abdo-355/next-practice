@@ -6,7 +6,7 @@ import connectDB from "@/lib/connectDB";
 const handler: NextApiHandler = async (req, res) => {
   try {
     // connect to the database
-    connectDB();
+    await connectDB();
 
     if (req.method === "POST") {
       const email = new Email({ email: req.body.email });
