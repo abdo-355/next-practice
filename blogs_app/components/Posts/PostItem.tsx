@@ -18,12 +18,12 @@ const PostItem: React.FC<Props> = ({ post }) => {
         year: "numeric",
     });
 
-    const imagePath = "/images/posts/" + slug + image
+    const imagePath = `/images/posts/${slug}/${image}`;
 
     return <li className={styles.post}>
-        <Link href={"/"}>
+        <Link href={`/posts/${slug}`}>
             <div className={styles.image}>
-                <Image src={imagePath} alt={title} width={300} height={200} />
+                <Image src={imagePath} alt={title} fill />
             </div>
             <div className={styles.content}>
                 <h3>{title}</h3>

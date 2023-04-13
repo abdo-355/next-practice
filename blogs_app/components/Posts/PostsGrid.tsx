@@ -6,7 +6,7 @@ interface Props {
     posts: Post[];
 }
 
-const PostGrid: React.FC<Props> = ({ posts }) => {
+const PostsGrid: React.FC<Props> = ({ posts }) => {
     return <ul className={styles.grid}>
         {posts.map(post =>
             <PostItem key={post.id} post={post} />
@@ -14,4 +14,4 @@ const PostGrid: React.FC<Props> = ({ posts }) => {
     </ul>
 }
 
-export default PostGrid;
+export default PostsGrid;
