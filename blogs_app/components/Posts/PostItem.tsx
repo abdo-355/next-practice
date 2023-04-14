@@ -10,7 +10,7 @@ interface Props {
 
 const PostItem: React.FC<Props> = ({ post }) => {
 
-    const { content, image, date, title, slug } = post;
+    const { excerpt, image, date, title, slug } = post;
 
     const formattedDate = new Date(date).toLocaleDateString("en-US", {
         day: "numeric",
@@ -28,7 +28,7 @@ const PostItem: React.FC<Props> = ({ post }) => {
             <div className={styles.content}>
                 <h3>{title}</h3>
                 <time>{formattedDate}</time>
-                <p>{content}</p>
+                <p>{excerpt}</p>
             </div>
         </Link>
     </li>
