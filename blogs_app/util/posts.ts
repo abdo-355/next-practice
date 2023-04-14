@@ -13,12 +13,13 @@ interface Data {
 
 const postsDir = path.join(process.cwd(), "content");
 
-const getPostData = (fileName: string): Post => {
-  const filePath = path.join(postsDir, fileName);
+export const getPostData = (postId: string): Post => {
+  // removes the file extension if exists to make the function flexible
+  const postSlug = postId.replace(/\.md$/, "");
+
+  const filePath = path.join(postsDir, `${postSlug}.md`);
   const fileContent = fs.readFileSync(filePath, "utf-8");
   const { content, data } = matter(fileContent);
-
-  const postSlug = fileName.replace(/\.md$/, ""); // removes the file extension
 
   const postData = {
     slug: postSlug,
