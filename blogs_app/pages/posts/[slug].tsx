@@ -12,9 +12,7 @@ const PostDetailPage: React.FC<Props> = ({ post }) => {
     return <PostContent post={post} />
 }
 
-export const getStaticProps: GetStaticProps<Props> = async (context) => {
-    const { params } = context;
-
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
     const slug = params!.slug as string;
 
     const post = getPostData(slug)
