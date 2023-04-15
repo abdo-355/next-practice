@@ -1,5 +1,7 @@
 import Image from "next/image";
 import ReactMarkdown, { Components } from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
 
 import PostHeader from "./PostHeader";
 import { Post } from "@/types/types";
@@ -29,6 +31,10 @@ const PostContent: React.FC<Props> = ({ post }) => {
 
             return <p>{paragraph.children}</p>
         },
+        code: (code) => {
+            const { children, className } = code
+            return <SyntaxHighlighter language={className?.split("-")[1]} style={coldarkDark}>{children as string[]}</SyntaxHighlighter>
+        }
     }
 
     return <article className={styles.content}>
