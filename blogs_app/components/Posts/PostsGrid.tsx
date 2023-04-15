@@ -9,7 +9,7 @@ interface Props {
 const PostsGrid: React.FC<Props> = ({ posts }) => {
     return <ul className={styles.grid}>
         {posts.map(post =>
-            <PostItem key={post.id} post={post} />
+            <PostItem key={post.title} post={post} />
         )}
     </ul>
 }
