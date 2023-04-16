@@ -1,7 +1,9 @@
 import Image from "next/image";
 import ReactMarkdown, { Components } from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coldarkDark } from "react-syntax-highlighter/dist/cjs/styles/prism";
+import { PrismLight as SyntaxHighlighter } from "react-syntax-highlighter";
+import coldarkDark from "react-syntax-highlighter/dist/cjs/styles/prism/coldark-dark";
+import js from "react-syntax-highlighter/dist/cjs/languages/prism/javascript";
+import css from "react-syntax-highlighter/dist/cjs/languages/prism/css";
 
 import PostHeader from "./PostHeader";
 import { Post } from "@/types/types";
@@ -11,6 +13,8 @@ interface Props {
     post: Post;
 }
 
+SyntaxHighlighter.registerLanguage("js", js)
+SyntaxHighlighter.registerLanguage("css", css)
 
 const PostContent: React.FC<Props> = ({ post }) => {
     const imagePath = `/images/posts/${post.slug}/${post.image}`

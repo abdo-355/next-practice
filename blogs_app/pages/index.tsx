@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import FeaturedPosts from "@/components/HomePage/FeaturedPosts";
 import Hero from "@/components/HomePage/Hero";
-import { getFeaturedPosts } from "@/util/posts";
+import { getFeaturedPosts } from "@/utils/posts";
 import { Post } from "@/types/types";
 
 interface Props {

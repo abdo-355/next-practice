@@ -2,7 +2,7 @@ import { GetStaticProps, GetStaticPaths } from "next";
 
 import PostContent from "@/components/Posts/PostDetails/PostContent";
 import { Post } from "@/types/types"
-import { getAllPosts, getPostData } from "@/util/posts";
+import { getAllPosts, getPostData } from "@/utils/posts";
 import Head from "next/head";
 
 interface Props {
