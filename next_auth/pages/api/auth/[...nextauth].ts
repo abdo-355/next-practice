@@ -1,11 +1,11 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
 import { connectToDB } from "@/utils/DB";
 import User from "@/models/user";
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
@@ -31,11 +31,10 @@ export default NextAuth({
           throw new Error("could not log you in");
         }
 
-        return {
-          id: user._id,
-          email: user.email,
-        };
+        return { id: user._id.toString().slice(0, 8), email: user.email };
       },
     }),
   ],
-});
+};
+
+export default NextAuth(authOptions);
