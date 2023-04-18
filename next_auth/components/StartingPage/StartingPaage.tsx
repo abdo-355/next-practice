@@ -1,4 +1,4 @@
-import styles from './StartingPage.module.css';
+import styles from "./StartingPage.module.css";
 
 const StartingPage = () => {
     // Show Link to Login page if NOT auth

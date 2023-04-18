@@ -1,5 +1,5 @@
-import { FC, Fragment, ReactNode } from 'react';
-import MainNavigation from './MainNavigation';
+import { FC, Fragment, ReactNode } from "react";
+import MainNavigation from "./MainNavigation";
 
 interface LayoutProps {
     children: ReactNode;

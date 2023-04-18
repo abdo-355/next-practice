@@ -1,5 +1,5 @@
-import ProfileForm from './ProfileForm';
-import styles from './UserProfile.module.css';
+import ProfileForm from "./ProfileForm";
+import styles from "./UserProfile.module.css";
 
 const UserProfile = () => {
     // Redirect away if NOT auth
